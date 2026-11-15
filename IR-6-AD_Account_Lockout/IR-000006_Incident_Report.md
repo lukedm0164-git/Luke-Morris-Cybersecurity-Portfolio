@@ -18,17 +18,17 @@ Repeated failed authentication attempts against the Active Directory account jsm
 
 The incident was reported through a Jira Service Management ticket submitted by John Smith after he experienced an account lockout. Subsequent investigation of Windows Server Security logs identified Event ID 4740, confirming the lockout, and Event ID 4625, documenting the preceding failed authentication attempts.
 
-<div align="center"><img src="IR-000006_02-02_sc_ticket.png" alt="IR-000006_02-02_sc_ticket.png" style="max-width:85%;height:auto"></div>
+<div align="center"><img src="images/IR-000006_02-02_sc_ticket.png" alt="IR-000006_02-02_sc_ticket.png" style="max-width:85%;height:auto"></div>
 
-<div align="center"><img src="IR-000006_02-02_sc_lockout.png" alt="IR-000006_02-02_sc_lockout.png" style="max-width:85%;height:auto"></div>
+<div align="center"><img src="images/IR-000006_02-02_sc_lockout.png" alt="IR-000006_02-02_sc_lockout.png" style="max-width:85%;height:auto"></div>
 
 The affected user was John Smith (AD\jsmith) in the ad.lab.test domain. Authentication failures originated from LAB-003-WIN11 (192.168.56.30) and were recorded by domain controller LAB-007-DC01, affecting John's ability to establish new authenticated sessions.
 
 Windows Security Event 4740 confirmed the account lockout at 1:47:28 PM on November 14, 2026, while Event 4625 documented incorrect-password NTLM network authentication attempts from 192.168.56.30. Although the originating workstation and authentication method were identified, the collected logs did not independently establish the specific process responsible for initiating the attempts.
 
-<div align="center"><img src="IR-000006_02-04_sc_AD-log.png" alt="IR-000006_02-04_sc_AD-log.png" style="max-width:85%;height:auto"></div>
+<div align="center"><img src="images/IR-000006_02-04_sc_AD-log.png" alt="IR-000006_02-04_sc_AD-log.png" style="max-width:85%;height:auto"></div>
 
-<div align="center"><img src="IR-000006_02-04_sc_reason-for-lock.png" alt="IR-000006_02-04_sc_reason-for-lock.png" style="max-width:85%;height:auto"></div>
+<div align="center"><img src="images/IR-000006_02-04_sc_reason-for-lock.png" alt="IR-000006_02-04_sc_reason-for-lock.png" style="max-width:85%;height:auto"></div>
 
 After communication with user jsmith it was confirmed to be legitimate authentication failures due to a lengthy password. His account was unlocked with the requirement he set a new password.
 
@@ -38,11 +38,11 @@ The event was discovered via a ticket submitted by jsmith on Jira, and Active Di
 
 The event signifiers were Windows Security Events 4740 and 4625 which confirmed the failed authentication attemps and account lockout.
 
-<div align="center"><img src="IR-000006_03-02_sc_auth-failures.png" alt="IR-000006_03-02_sc_auth-failures.png" style="max-width:85%;height:auto"></div>
+<div align="center"><img src="images/IR-000006_03-02_sc_auth-failures.png" alt="IR-000006_03-02_sc_auth-failures.png" style="max-width:85%;height:auto"></div>
 
 The final failed authentication attempt and subesequent lockout occurred at 1:47:28 PM CST on 11/14/2026.
 
-<div align="center"><img src="IR-000006_03-03_sc_event-details.png" alt="IR-000006_03-03_sc_event-details.png" style="max-width:85%;height:auto"></div>
+<div align="center"><img src="images/IR-000006_03-03_sc_event-details.png" alt="IR-000006_03-03_sc_event-details.png" style="max-width:85%;height:auto"></div>
 
 ## 4. Initial Triage
 
@@ -96,7 +96,7 @@ The Unlock account box was selected in Windows server and a rule was enforced to
 
 Normal behavior was verified afterward by running the GetADUser command in powershell and extracting its properties, showing the account was no longer locked out.
 
-<div align="center"><img src="IR-000006_11-02_sc_baseline.png" alt="IR-000006_11-02_sc_baseline.png" style="max-width:85%;height:auto"></div>
+<div align="center"><img src="images/IR-000006_11-02_sc_baseline.png" alt="IR-000006_11-02_sc_baseline.png" style="max-width:85%;height:auto"></div>
 
 ## 12. Conclusion and Recommendations
 
